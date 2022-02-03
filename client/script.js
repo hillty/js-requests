@@ -71,7 +71,14 @@ sayHelloButton.addEventListener('click', sayHello)
 const ohMy = () => {
     axios.get('http://localhost:3000/animals').then(
         res = () => {
-        console.log(res.data)
+        // console.log(res.data)
+        for(let item of req.data){
+            let temp = document.createElement('p')
+            temp.innerHTML = item
+            console.log(temp)
+            temp.style.color = 'red'
+            document.body.appendChild(temp) 
+        }
     })
 }
 
@@ -153,8 +160,9 @@ document.querySelector('#query-button').addEventListener('click', queryRequest)
     In the function that you wrote for Problem 8, change the URL to test a couple different scenarios. 
 
     1: Send no queries on the URL -- what happened? 
-
+    //the system returns a string of "you sent an empty query!"
     2: Send more than 1 query on the URL -- what happened? 
+    //the system returns a string of "you sent more than 1 query!"
 */
 
 // Edit code in Problem 8
@@ -184,4 +192,3 @@ document.querySelector('#query-button').addEventListener('click', queryRequest)
     Based on what we did earlier to display this type of data, write code that will display the response in your HTML document. 
 */
 
-// CODE HERE 
