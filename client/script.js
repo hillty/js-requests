@@ -23,6 +23,7 @@ sayHelloButton.addEventListener('mouseover', () => {
 })
 
 
+
 // PROBLEM 3
 /*
     Now you can see that the button colors change, but they do not change back when we take the mouse off of the button.
@@ -71,13 +72,12 @@ sayHelloButton.addEventListener('click', sayHello)
 const ohMy = () => {
     axios.get('http://localhost:3000/animals').then(
         res = () => {
-        // console.log(res.data)
+        console.log(res.data)
         for(let item of req.data){
-            let temp = document.createElement('p')
-            temp.innerHTML = item
-            console.log(temp)
-            temp.style.color = 'red'
-            document.body.appendChild(temp) 
+            let newP = document.createElement('p')
+            newP.textContent = res.data[i]
+            const body = document.querySelector('body')
+            body.appendChild(newP) 
         }
     })
 }
@@ -192,3 +192,19 @@ document.querySelector('#query-button').addEventListener('click', queryRequest)
     Based on what we did earlier to display this type of data, write code that will display the response in your HTML document. 
 */
 
+const createFood = (event)=>{
+    event.preventDefault()
+    const input = document.querySelector('input')
+    let foodInput = input.value
+    const body = {
+        newFood: foodInput
+    }
+    axios.post(`http://localhost:3000/food`, body)
+    .then(res => {
+        document.getElementById('foods').textContent =  res.data.join(', ')
+    })
+    .catch(error => console.log(error))
+    input.value = ''
+}
+
+document.querySelector('form').addEventListener('submit', createFood)
